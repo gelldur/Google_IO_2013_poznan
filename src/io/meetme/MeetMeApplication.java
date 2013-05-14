@@ -40,6 +40,11 @@ public class MeetMeApplication extends Application implements
 	    RestClient restClient = new RestClient("www.google.pl",
 		    RequestMethod.POST);
 
+	    restClient.AddParam("points",
+		    String.valueOf(DatabaseManager.getInstance().getPoints()));
+	    restClient.AddParam("username",
+		    String.valueOf(DatabaseManager.getInstance().getPoints()));
+
 	    try {
 		restClient.buildRequest();
 	    } catch (Exception e) {
