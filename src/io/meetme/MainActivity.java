@@ -71,7 +71,9 @@ public class MainActivity extends FragmentActivity {
 			return;
 		}
 		
-		databaseManager.add(user);
+		if(databaseManager.add(user)) {
+			Toast.makeText(this, "Poznales uzytkownika: " + user.getName() + ". Zdobyles jeden punkt!", Toast.LENGTH_LONG).show();
+		}
 	}
 
 	public void startScanActivity() {

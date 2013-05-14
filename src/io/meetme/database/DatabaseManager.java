@@ -51,7 +51,7 @@ public class DatabaseManager extends DatabaseHelper {
 
 		return INSTANCE;
 	}
-	
+
 	public boolean userExists(User user) {
 		return getUser(user.getUserID()) != null;
 	}
@@ -96,7 +96,8 @@ public class DatabaseManager extends DatabaseHelper {
 	public User getUser(String userId) {
 
 		Cursor query = getReadableDatabase().query(false, TABLE, null,
-				KEY_USER_ID + "=" + userId, null, null, null, null, null);
+				KEY_USER_ID + "=\"" + userId + "\"", null, null, null, null,
+				null);
 
 		if (query.moveToNext() == false) {
 			query.close();
