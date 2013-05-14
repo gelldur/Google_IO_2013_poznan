@@ -2,7 +2,8 @@
 <resources>
 
     <string name="app_name">I/O Meet Me</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="name_hint">Jak się nazywasz?</string>
+    <string name="name_confirm_button">Poznaj innych!</string>
+    <string name="must_provide_name">Musisz nam powiedzieć jak się nazywasz :)</string>
 
 </resources>
