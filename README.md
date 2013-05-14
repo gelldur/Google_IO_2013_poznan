@@ -15,5 +15,5 @@ restClient.addParam("param_name", param_value);
 restClient.buildRequest();
 restClient.executeRequest(); // Blocking
 
-return restClient.getResponse();
+restClient.getResponse();
 ````
