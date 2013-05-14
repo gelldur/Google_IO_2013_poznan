@@ -52,6 +52,10 @@ public class DatabaseManager extends DatabaseHelper {
 
     public boolean add(User user) {
 
+	if (getUser(user.getUserID()) != null) {
+	    return false;
+	}
+
 	ContentValues contentValues = new ContentValues();
 	contentValues.put(KEY_USER_ID, user.getUserID());
 	contentValues.put(KEY_DATE, user.getMeetDate().getTime());
