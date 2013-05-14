@@ -5,5 +5,10 @@
     <string name="name_hint">Jak się nazywasz?</string>
     <string name="name_confirm_button">Poznaj innych!</string>
     <string name="must_provide_name">Musisz nam powiedzieć jak się nazywasz :)</string>
+    
+    
+    <string name="tab_they_met_you">DAJ SIĘ POZNAĆ</string>
+    <string name="tab_you_met_them">POZNAJ KOGOŚ</string>
+    <string name="tab_leaderboard">RANKING</string>
 
 </resources>
