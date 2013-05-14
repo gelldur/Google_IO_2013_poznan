@@ -1,6 +1,13 @@
 package io.meetme;
 
 import io.meetme.adapter.SwipePagerAdapter;
+import io.meetme.database.DatabaseManager;
+import io.meetme.database.User;
+import io.meetme.qr.QrMessage;
+import io.meetme.qr.QrParser;
+
+import java.util.Date;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -13,12 +20,15 @@ public class MainActivity extends FragmentActivity {
 
 	private SwipePagerAdapter swipePagerAdapter;
 	private ViewPager viewPager;
+	
+	private DatabaseManager databaseManager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		
+		databaseManager = DatabaseManager.getInstance();
 		setUpPager();
 	}
 
@@ -36,11 +46,32 @@ public class MainActivity extends FragmentActivity {
 			if (resultCode == RESULT_OK) {
 				String text = data
 						.getStringExtra(ScanActivity.EXTRA_RESULT_TEXT);
-				Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+				handleQrScan(text);
 			} else {
 				// Scan was cancelled.
 			}
 		}
+	}
+
+	private void handleQrScan(String rawQrMessage) {
+		QrMessage qrMessage = QrParser.decode(rawQrMessage);
+		
+		if(qrMessage == null) {
+			Toast.makeText(this, R.string.invalid_qr_code, Toast.LENGTH_LONG).show();
+			return;
+		}
+		
+		User user = new User();
+		user.setName(qrMessage.getUsername());
+		user.setUserID(qrMessage.getUniqueId());
+		user.setMeetDate(new Date());
+		
+		if(databaseManager.userExists(user)) {
+			Toast.makeText(this, R.string.double_scan, Toast.LENGTH_LONG).show();
+			return;
+		}
+		
+		databaseManager.add(user);
 	}
 
 	public void startScanActivity() {

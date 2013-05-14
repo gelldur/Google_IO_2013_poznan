@@ -2,6 +2,8 @@ package io.meetme.ui.fragment;
 
 import io.meetme.PreferenceKeys;
 import io.meetme.R;
+import io.meetme.qr.QrMessage;
+import io.meetme.qr.QrParser;
 import io.meetme.util.AndroidUtils;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -44,13 +46,13 @@ public class TheyMetYouFragment extends Fragment {
 	private Bitmap generateQR() {
 		int size = AndroidUtils.getScreenWidth(getActivity());
 		size = size > QR_MAX_SIZE ? QR_MAX_SIZE : size; // Limit size
-
-		String uuid = AndroidUtils.getUUID(getActivity()
-				.getApplicationContext());
+		
 		String name = sharedPreferences.getString(PreferenceKeys.USERNAME_STR,
 				"");
-
-		String message = name + "_|_" + uuid;
+		String uuid = AndroidUtils.getUUID(getActivity()
+				.getApplicationContext());
+		
+		String message = QrParser.encode(new QrMessage(name, uuid));
 
 		QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(message, null,
 				Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), size);

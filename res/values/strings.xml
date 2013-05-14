@@ -15,4 +15,9 @@
     
     <string name="under_construction">W trakcie budowy :)</string>
     <string name="scan_code">Skanuj kod!</string>
+    
+    <string name="invalid_qr_code">Zeskanowany kod QR jest niepoprawny!</string>
+    <string name="double_scan">Znasz już tą osobę! Nie oszukuj :)</string>
+    
+    
 </resources>
