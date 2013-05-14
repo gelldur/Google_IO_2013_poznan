@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changeLog databaseName="fickle_test_database" >
+    <changeSet
+        id="1"
+        comment="Comment of change set id 1"
+        author="John" >
+        <createTable
+            name="test_database"
+            comment="Haha funny" >
+            <column
+                name="id"
+                comment="column 1"
+                nullable="false"
+                primaryKey="true"
+                type="integer" >
+            </column>
+            <column
+                name="name"
+                type="text" >
+            </column>
+        </createTable>
+        <deleteTable
+            name="test_database"
+            comment="string" />
+        <sql
+            command="DROP TABLE IF EXIST test_database"
+            comment="string" />
+    </changeSet>
+    <changeSet
+        id="2"
+        author="john2" >
+    </changeSet>
+</changeLog>

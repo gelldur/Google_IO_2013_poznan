@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changeLog databaseName="database" >
+    <changeSet
+        id="1"
+        author="Dawid" >
+        <createTable
+            name="users"
+            comment="User who we meet" >
+            <column
+                name="_id"
+                primaryKey="true"
+                type="integer" >
+            </column>
+            <column
+                name="user_id"
+                type="integer" >
+            </column>
+            <column
+                name="user_name"
+                type="text" >
+            </column>
+            <column
+                name="date"
+                type="integer" >
+            </column>
+        </createTable>
+    </changeSet>
+</changeLog>
