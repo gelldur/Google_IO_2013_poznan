@@ -21,6 +21,8 @@ public class DatabaseManager extends DatabaseHelper {
     private static Context applicationContext;
     private static int databaseFile;
 
+    private static OnUserAddedListener onUserAddedListener;
+
     public static void init(Context applicationContext, int databasefile) {
 	DatabaseManager.databaseFile = databasefile;
 	DatabaseManager.applicationContext = applicationContext;
@@ -64,6 +66,10 @@ public class DatabaseManager extends DatabaseHelper {
 	    return false;
 	}
 
+	if (onUserAddedListener != null) {
+	    onUserAddedListener.onAdded(user);
+	}
+
 	return true;
     }
 
@@ -89,6 +95,7 @@ public class DatabaseManager extends DatabaseHelper {
 		KEY_USER_ID + "=" + userId, null, null, null, null, null);
 
 	if (query.moveToNext() == false) {
+	    query.close();
 	    return null;
 	}
 
@@ -97,7 +104,7 @@ public class DatabaseManager extends DatabaseHelper {
 	user.setUserID(query.getString(query.getColumnIndex(KEY_USER_ID)));
 	user.setName(query.getString(query.getColumnIndex(KEY_USER_NAME)));
 	user.setMeetDate(new Date(query.getLong(query.getColumnIndex(KEY_DATE))));
-
+	query.close();
 	return user;
     }
 
@@ -116,4 +123,18 @@ public class DatabaseManager extends DatabaseHelper {
 	}
 	return super.getWritableDatabase();
     }
+
+    public static OnUserAddedListener getOnUserAddedListener() {
+	return onUserAddedListener;
+    }
+
+    public static void setOnUserAddedListener(
+	    OnUserAddedListener onUserAddedListener) {
+	DatabaseManager.onUserAddedListener = onUserAddedListener;
+    }
+
+    public interface OnUserAddedListener {
+	public void onAdded(User user);
+    }
+
 }
