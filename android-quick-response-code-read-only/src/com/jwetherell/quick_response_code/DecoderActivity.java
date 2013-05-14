@@ -23,6 +23,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.google.zxing.ResultPoint;
 
+import android.R.raw;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

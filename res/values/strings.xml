@@ -6,9 +6,13 @@
     <string name="name_confirm_button">Poznaj innych!</string>
     <string name="must_provide_name">Musisz nam powiedzieć jak się nazywasz :)</string>
     
-    
     <string name="tab_they_met_you">DAJ SIĘ POZNAĆ</string>
     <string name="tab_you_met_them">POZNAJ KOGOŚ</string>
     <string name="tab_leaderboard">RANKING</string>
-
+    
+    <string name="they_met_you_tutorial">Jeśli ktoś Cię poznał to pozwól mu zeskanować ten kod QR!</string>
+    <string name="you_met_them_tutorial">Poznałeś/aś kogoś? Zeskanuj jego kod QR!</string>
+    
+    <string name="under_construction">W trakcie budowy :)</string>
+    <string name="scan_code">Skanuj kod!</string>
 </resources>

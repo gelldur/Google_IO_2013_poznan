@@ -16,7 +16,7 @@ public class LeaderboardFragment extends Fragment {
 	}
 
 	private View inflateLayout(LayoutInflater inflater, ViewGroup container) {
-		View layout = inflater.inflate(R.layout.fragment_they_met_you, container,
+		View layout = inflater.inflate(R.layout.fragment_leaderboard, container,
 				false);
 		return layout;
 	}
