@@ -6,6 +6,7 @@ import io.meetme.database.User;
 import io.meetme.restclient.RestClient;
 import io.meetme.restclient.RestClient.RequestMethod;
 import io.meetme.restclient.RestClient.Response;
+import io.meetme.util.AndroidUtils;
 import android.app.Application;
 import android.os.SystemClock;
 import android.util.Log;
@@ -13,9 +14,13 @@ import android.util.Log;
 public class MeetMeApplication extends Application implements
 	OnUserAddedListener {
 
+    public static MeetMeApplication instance;
+
     @Override
     public void onCreate() {
 	super.onCreate();
+
+	instance = this;
 
 	DatabaseManager.init(this, R.xml.database);
 	DatabaseManager.setOnUserAddedListener(this);
@@ -42,7 +47,8 @@ public class MeetMeApplication extends Application implements
 		    "http://googleio.vador.mydevil.net/saverank/",
 		    RequestMethod.POST);
 
-	    restClient.AddParam("id", "123456789");
+	    restClient.AddParam("id",
+		    AndroidUtils.getUUID(MeetMeApplication.instance));
 	    restClient.AddParam("points",
 		    String.valueOf(DatabaseManager.getInstance().getPoints()));
 	    restClient.AddParam("username",
