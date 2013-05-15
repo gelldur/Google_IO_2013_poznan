@@ -21,6 +21,11 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
     private PointsLoader pointsLoader;
     private Thread threadPointSender;
 
+    /**
+     * [{"username": "Delfin", "points": 190, "id": "934503aq123312"},
+     * {"username": "Ivan", "points": 100, "id": "903aqwe312"}, {"username":
+     * "VaIer", "points": 20, "id": "123aqwe312"}]
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	    Bundle savedInstanceState) {
