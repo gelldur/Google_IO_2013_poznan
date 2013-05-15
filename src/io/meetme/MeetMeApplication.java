@@ -58,6 +58,10 @@ public class MeetMeApplication extends Application implements
 		restClient.buildRequest();
 	    } catch (Exception e) {
 		e.printStackTrace();
+		SystemClock.sleep(100000);
+		// Pseudo recursive call :D
+		StatSender statSender = new StatSender();
+		statSender.run();
 	    }
 	    restClient.executeRequest();
 

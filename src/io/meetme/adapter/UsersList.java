@@ -49,4 +49,9 @@ public class UsersList extends BaseAdapterSnippet {
 
     }
 
+    public void addAll(ArrayList<User> result) {
+	users.addAll(result);
+	notifyDataSetChanged();
+    }
+
 }
