@@ -29,17 +29,20 @@ public class MeetMeApplication extends Application implements
     @Override
     public void onAdded(User user) {
 	// TODO test it when server will be up :D
-	// new Thread(new StatSender()).start();
+	new Thread(new StatSender()).start();
     }
 
-    private class StatSender implements Runnable {
+    public static class StatSender implements Runnable {
 
 	@Override
 	public void run() {
 
-	    RestClient restClient = new RestClient("www.google.pl",
+	    // Please do not cheat :D and hack XD
+	    RestClient restClient = new RestClient(
+		    "http://googleio.vador.mydevil.net/saverank/",
 		    RequestMethod.POST);
 
+	    restClient.AddParam("id", "123456789");
 	    restClient.AddParam("points",
 		    String.valueOf(DatabaseManager.getInstance().getPoints()));
 	    restClient.AddParam("username",
@@ -53,7 +56,11 @@ public class MeetMeApplication extends Application implements
 	    restClient.executeRequest();
 
 	    Response response = restClient.getResponse();
-	    if (response.httpCode != 666) {
+
+	    System.out.println("Response: " + response.content + " code "
+		    + response.httpCode + " err " + response.httpCodeMessage);
+
+	    if (response.httpCode != 200) {
 		// Go sleep and retry when connection fails
 		SystemClock.sleep(10000);
 		// Pseudo recursive call :D

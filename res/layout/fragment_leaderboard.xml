@@ -8,25 +8,33 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:weightSum="2" >
-
     <View
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
-
+    <TextView
+        android:id="@+id/textViewPoints"
+        style="@style/CardTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/your_points" />
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical" >
-
         <TextView
             style="@style/CardTitle"
-            android:gravity="center"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/under_construction" />
+        <Button
+            android:id="@+id/buttonPushPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="push -f origon/points" />
     </LinearLayout>
-
 </LinearLayout>

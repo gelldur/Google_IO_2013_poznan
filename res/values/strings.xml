@@ -18,6 +18,7 @@
     
     <string name="invalid_qr_code">Zeskanowany kod QR jest niepoprawny!</string>
     <string name="double_scan">Znasz już tą osobę! Nie oszukuj :)</string>
+    <string name="your_points">Twoje punkty:</string>
     
     
 </resources>
