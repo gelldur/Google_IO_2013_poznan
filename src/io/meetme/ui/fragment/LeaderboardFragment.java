@@ -30,13 +30,17 @@ import android.widget.Toast;
 
 public class LeaderboardFragment extends Fragment implements OnClickListener {
 
+    /**
+     * [{"username": "Delfin", "points": 190, "id": "934503aq123312"},
+     * {"username": "Ivan", "points": 100, "id": "903aqwe312"}, {"username":
+     * "VaIer", "points": 20, "id": "123aqwe312"}]
+     */
     private TextView textTeviewPoints;
     private Button buttonPushPoints;
     private PointsLoader pointsLoader;
     private Thread threadPointSender;
     private UsersList usersAdapter;
     private RankingLoader rankingLoader;
-    private WebView webView;
 
     /**
      * [{"username": "Delfin", "points": 190, "id": "934503aq123312"},
@@ -58,9 +62,6 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
 	textTeviewPoints = (TextView) layout.findViewById(R.id.textViewPoints);
 	buttonPushPoints = (Button) layout.findViewById(R.id.buttonPushPoints);
 
-	webView = (WebView) layout.findViewById(R.id.webView);
-	webView.loadUrl("http://googleio.vador.mydevil.net/");
-
 	buttonPushPoints.setOnClickListener(this);
 
 	return layout;
@@ -69,17 +70,14 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
     @Override
     public void onResume() {
 	super.onResume();
-
-	pointsLoader = new PointsLoader();
-	pointsLoader.execute();
-
 	if (rankingLoader == null
 		|| rankingLoader.getStatus() == Status.FINISHED) {
 	    rankingLoader = new RankingLoader();
 	    rankingLoader.execute();
 	}
 
-	webView.reload();
+	pointsLoader = new PointsLoader();
+	pointsLoader.execute();
 
     }
 
@@ -94,7 +92,6 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
 	@Override
 	protected void onPreExecute() {
 	    super.onPreExecute();
-
 	    textTeviewPoints.setText("Loading data");
 	}
 
@@ -109,7 +106,6 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
 	@Override
 	protected void onPostExecute(Integer result) {
 	    super.onPostExecute(result);
-
 	    textTeviewPoints.setText(getString(R.string.your_points) + result);
 	}
     }
@@ -181,8 +177,6 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
 	    Toast.makeText(getActivity(), "Yeah i'm sending...",
 		    Toast.LENGTH_SHORT).show();
 	}
-
-	webView.reload();
     }
 
     @Override
