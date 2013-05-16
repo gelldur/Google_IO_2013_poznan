@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
     private Thread threadPointSender;
     private UsersList usersAdapter;
     private RankingLoader rankingLoader;
+    private WebView webView;
 
     /**
      * [{"username": "Delfin", "points": 190, "id": "934503aq123312"},
@@ -56,6 +58,9 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
 	textTeviewPoints = (TextView) layout.findViewById(R.id.textViewPoints);
 	buttonPushPoints = (Button) layout.findViewById(R.id.buttonPushPoints);
 
+	webView = (WebView) layout.findViewById(R.id.webView);
+	webView.loadUrl("http://googleio.vador.mydevil.net/");
+
 	buttonPushPoints.setOnClickListener(this);
 
 	return layout;
@@ -73,6 +78,8 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
 	    rankingLoader = new RankingLoader();
 	    rankingLoader.execute();
 	}
+
+	webView.reload();
 
     }
 
@@ -174,6 +181,8 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
 	    Toast.makeText(getActivity(), "Yeah i'm sending...",
 		    Toast.LENGTH_SHORT).show();
 	}
+
+	webView.reload();
     }
 
     @Override

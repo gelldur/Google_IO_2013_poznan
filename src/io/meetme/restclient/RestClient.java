@@ -96,8 +96,7 @@ public class RestClient {
 		}
 		case POST: {
 			HttpPost post = new HttpPost(url + combinedParams);
-
-			if (bodyValues.size() > 0) {
+			if (bodyValues.size() >= 0) {
 				MultipartEntity reqEntity = new MultipartEntity(
 						HttpMultipartMode.BROWSER_COMPATIBLE, null,
 						Charset.forName("UTF-8"));
