@@ -25,6 +25,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
     private PointsLoader pointsLoader;
     private Thread threadPointSender;
     private UsersList usersAdapter;
+    private ListView listView;
     private RankingLoader rankingLoader;
 
     /**
@@ -63,6 +65,9 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
 	buttonPushPoints = (Button) layout.findViewById(R.id.buttonPushPoints);
 
 	buttonPushPoints.setOnClickListener(this);
+
+	listView = (ListView) layout.findViewById(R.id.list);
+	listView.setAdapter(usersAdapter);
 
 	return layout;
     }
