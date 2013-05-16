@@ -182,6 +182,12 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
 	    Toast.makeText(getActivity(), "Yeah i'm sending...",
 		    Toast.LENGTH_SHORT).show();
 	}
+
+	if (rankingLoader == null
+		|| rankingLoader.getStatus() == Status.FINISHED) {
+	    rankingLoader = new RankingLoader();
+	    rankingLoader.execute();
+	}
     }
 
     @Override
