@@ -167,7 +167,6 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
 	@Override
 	protected void onPostExecute(ArrayList<User> result) {
 	    super.onPostExecute(result);
-
 	    usersAdapter.addAll(result);
 	}
     }
