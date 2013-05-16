@@ -2,8 +2,21 @@ package io.meetme.ui.fragment;
 
 import io.meetme.MeetMeApplication;
 import io.meetme.R;
+import io.meetme.adapter.UsersList;
 import io.meetme.database.DatabaseManager;
+import io.meetme.database.User;
+import io.meetme.restclient.RestClient;
+import io.meetme.restclient.RestClient.RequestMethod;
+import io.meetme.restclient.RestClient.Response;
+import io.meetme.util.AndroidUtils;
+
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,6 +27,7 @@ import android.widget.Toast;
 
 public class LeaderboardFragment extends Fragment implements OnClickListener {
 
+<<<<<<< HEAD
 	private PointsLoader pointsLoader;
 	private Thread threadPointSender;
 
@@ -27,6 +41,39 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
 			Bundle savedInstanceState) {
 		return inflateLayout(inflater, container);
 	}
+=======
+    private TextView textTeviewPoints;
+    private Button buttonPushPoints;
+    private PointsLoader pointsLoader;
+    private Thread threadPointSender;
+    private UsersList usersAdapter;
+    private RankingLoader rankingLoader;
+
+    /**
+     * [{"username": "Delfin", "points": 190, "id": "934503aq123312"},
+     * {"username": "Ivan", "points": 100, "id": "903aqwe312"}, {"username":
+     * "VaIer", "points": 20, "id": "123aqwe312"}]
+     */
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	    Bundle savedInstanceState) {
+	return inflateLayout(inflater, container);
+    }
+
+    private View inflateLayout(LayoutInflater inflater, ViewGroup container) {
+	View layout = inflater.inflate(R.layout.fragment_leaderboard,
+		container, false);
+
+	usersAdapter = new UsersList(getActivity());
+
+	textTeviewPoints = (TextView) layout.findViewById(R.id.textViewPoints);
+	buttonPushPoints = (Button) layout.findViewById(R.id.buttonPushPoints);
+
+	buttonPushPoints.setOnClickListener(this);
+
+	return layout;
+    }
+>>>>>>> 0295c792ed1ec26aee1e668f747048e1dd58570e
 
 	private View inflateLayout(LayoutInflater inflater, ViewGroup container) {
 		View layout = inflater.inflate(R.layout.fragment_leaderboard,
@@ -35,9 +82,19 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
 		return layout;
 	}
 
+<<<<<<< HEAD
 	@Override
 	public void onResume() {
 		super.onResume();
+=======
+	if (rankingLoader == null
+		|| rankingLoader.getStatus() == Status.FINISHED) {
+	    rankingLoader = new RankingLoader();
+	    rankingLoader.execute();
+	}
+
+    }
+>>>>>>> 0295c792ed1ec26aee1e668f747048e1dd58570e
 
 		pointsLoader = new PointsLoader();
 		pointsLoader.execute();
@@ -62,6 +119,7 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
 
 			DatabaseManager databaseManager = DatabaseManager.getInstance();
 
+<<<<<<< HEAD
 			return databaseManager.getPoints();
 		}
 
@@ -69,6 +127,68 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
 		protected void onPostExecute(Integer result) {
 			super.onPostExecute(result);
 		}
+=======
+	    textTeviewPoints.setText(getString(R.string.your_points) + result);
+	}
+    }
+
+    private class RankingLoader extends AsyncTask<Void, Void, ArrayList<User>> {
+
+	@Override
+	protected ArrayList<User> doInBackground(Void... params) {
+
+	    RestClient restClient = new RestClient(
+		    "http://googleio.vador.mydevil.net/getsorted/",
+		    RequestMethod.GET);
+
+	    restClient.AddParam("id",
+		    AndroidUtils.getUUID(MeetMeApplication.instance));
+	    restClient.AddParam("points",
+		    String.valueOf(DatabaseManager.getInstance().getPoints()));
+	    restClient.AddParam("username",
+		    String.valueOf(DatabaseManager.getInstance().getPoints()));
+
+	    try {
+		restClient.buildRequest();
+	    } catch (Exception e) {
+		e.printStackTrace();
+		// TODO error message show
+		return null;
+	    }
+	    restClient.executeRequest();
+
+	    Response response = restClient.getResponse();
+
+	    ArrayList<User> users = new ArrayList<User>();
+	    try {
+		JSONArray jsonArray = new JSONArray(response.content);
+
+		for (int i = 0; i < jsonArray.length(); ++i) {
+		    User user = new User();
+		    user.setName(jsonArray.getJSONObject(i).getString(
+			    "username"));
+		    user.setPoints(jsonArray.getJSONObject(i)
+			    .getInt(("points")));
+		    user.setUserID(jsonArray.getJSONObject(i).getString("id"));
+
+		    users.add(user);
+		}
+
+	    } catch (JSONException e) {
+		e.printStackTrace();
+	    }
+
+	    return users;
+	}
+
+	@Override
+	protected void onPostExecute(ArrayList<User> result) {
+	    super.onPostExecute(result);
+
+	    usersAdapter.addAll(result);
+	}
+    }
+>>>>>>> 0295c792ed1ec26aee1e668f747048e1dd58570e
 
 	}
 
@@ -93,4 +213,13 @@ public class LeaderboardFragment extends Fragment implements OnClickListener {
 			threadPointSender = null;
 		}
 	}
+<<<<<<< HEAD
+=======
+
+	if (rankingLoader != null) {
+	    rankingLoader.cancel(true);
+	    rankingLoader = null;
+	}
+    }
+>>>>>>> 0295c792ed1ec26aee1e668f747048e1dd58570e
 }

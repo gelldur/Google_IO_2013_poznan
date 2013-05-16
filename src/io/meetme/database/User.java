@@ -6,6 +6,7 @@ public class User {
     private String name;
     private Date meetDate;
     private String userID;
+    private int points;
 
     User(String userId, String name, Date meetDate) {
 	userID = userId;
@@ -42,6 +43,14 @@ public class User {
 
     public void setUserID(String userID) {
 	this.userID = userID;
+    }
+
+    public int getPoints() {
+	return points;
+    }
+
+    public void setPoints(int points) {
+	this.points = points;
     }
 
 }
